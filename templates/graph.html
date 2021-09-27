@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="../static/forms.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Admin Panel</h1>
+    </header>
+    <div class="main-page-design">
+
+        <div class="main-page-inside">
+            <form action="\addData" method="post">
+                <h3>ADD Employee Information</h3>
+                <div class="user-details">
+                    <div class="inputs">
+                        <label class="details">Emp Id</label>
+                        <input type="number" name="Emp-Id" placeholder="Eg;1001" ><br>
+                    </div>
+                    <div class="inputs">
+                        <label class="details">First Name</label>
+                        <input type="text" name="First-Name" placeholder="Eg;Yolando" ><br>
+                    </div>
+                    <div class="inputs">
+                        <label class="details">Last Name</label>
+                        <input type="text" name="Last-Name" placeholder="Eg;Stillwell" ><br>
+                    </div>
+                    <div class="inputs">
+                        <label class="details">Gender</label>
+                        <input type="text" name="Gender" placeholder="Eg;Male" ><br>
+                    </div>
+                    <div class="inputs">
+                        <label class="details">Address Pincode</label>
+                        <input type="number" name="Address_Pincode" placeholder="Eg;92105" ><br>
+                    </div>
+                    <div class="inputs">
+                        <label class="details"> Address State </label>
+                        <input type="text" name="Address_State" placeholder="Eg;California" ><br>
+                    </div>
+                    <div class="inputs">
+                        <label class="details">Address City</label>
+                        <input type="text" name="Address_City" placeholder="Eg;Amarillo" ><br>
+                    </div>
+                    <div class="inputs">
+                        <label class="details">Department</label>
+                        <input type="text" name="Department" placeholder="Eg;Sales" ><br>
+                    </div>
+                    
+                  
+                </div>
+                <input type="submit" class="btn" value="ADD">
+                <form action="/delete" method="POST">
+                    <h3>Delete Employee Record</h3>
+                    <div class="user-details">
+                        <div class="inputs">
+                            <input type="number" name="delete" placeholder="Eg;1001" ><br>
+                        </div>
+                    </div>
+                    <input type="submit" class="btn" formaction="/delete" value="Delete">
+                </form>
+            </form>
+        </div>
+        <div class="main-page-inside">
+            <h3>Graph</h3>
+           <canvas id="myChart" width=450 height= 400></canvas>
+           <form action="/filter" method="POST">
+                <div class="user-details">
+                        <div class="inputs">
+                        <label class="details" > Address Pincode</label>
+                        <input type="number" name="Address_Pincodes" placeholder="Eg;92105" ><br>
+                        </div>
+                        <div class="inputs">
+                            <label class="details">Address State </label>
+                            <input type="text" name="Address_States" placeholder="Eg;California" ><br>
+                        </div>
+                        <div class="inputs">
+                            <label class="details">Address City</label>
+                            <input type="text" name="Address_Citys" placeholder="Eg;Amarillo" ><br>
+                        </div>
+                    
+                </div>
+                <input type="submit" class="btn" formaction="/filter" value="filter">
+            </form>
+        </div>
+
+    </div>
+
+    <script>
+        var ctx =document.getElementById("myChart").getContext("2d");
+        var barColors = ["red", "green","blue","orange","brown"];
+        var linechart = new Chart(ctx,{
+            type:"bar",
+            data:{
+                labels:{{labels | safe}},
+                datasets:[{
+                        label :"Data points",
+                        data:{{ values | safe}},
+                        fill:false,
+                        backgroundColor: barColors,
+                        lineTension:0.1
+                    }]
+                },
+            options:{
+                responsive:false
+            }
+        })
+   
+    </script>
+</body>
+</html>
